@@ -1,0 +1,79 @@
+distributed-web-crawler/
+distributed-web-crawler/
+│
+├── src/                           		# Mã nguồn chính của dự án
+│   ├── crawler/                   		# Logic thu thập dữ liệu
+│   │   ├── fetcher.js             		# Lấy nội dung HTML
+│   │   ├── parser.js             	 	# Phân tích và trích xuất dữ liệu
+│   │   ├── scheduler.js           		# Lập lịch URL ưu tiên
+│   │   ├── deduplicator.js        		# Loại bỏ URL trùng lặp
+│   │   ├── robotsParser.js        		# Phân tích tệp robots.txt
+│   │   └── authChecker.js         		# Kiểm tra quyền truy cập URL
+│   │
+│   ├── queue/                     		# Quản lý hàng đợi URL
+│   │   ├── queueHandler.js          	# Lớp trừu tượng quản lý hàng đợi
+│   │   ├── memcachedQueue.js    	    # Hàng đợi dựa trên Memcached (thay Redis)
+│   │   ├── rabbitmqQueue.js       	  # Hàng đợi dựa trên RabbitMQ
+│   │   ├── fileQueue.js           		# Hàng đợi dựa trên tệp
+│   │   └── queueSecurity.js       	  # Cơ chế bảo mật hàng đợi
+│   │
+│   ├── storage/                   		# Lưu trữ dữ liệu
+│   │   ├── storageHandler.js      	  # Lớp trừu tượng quản lý lưu trữ
+│   │   ├── fileStorage.js         		# Lưu dữ liệu vào hệ thống tệp
+│   │   ├── meiliStorage.js        		# Lưu dữ liệu vào Meilisearch
+│   │   ├── mongoStorage.js        	  # Lưu metadata vào MongoDB
+│   │   └── storageEncryption.js   	  # Mã hóa dữ liệu trước khi lưu
+│   │
+│   ├── processing/                		# Xử lý dữ liệu
+│   │   ├── dataCleaner.js         		# Làm sạch dữ liệu
+│   │   ├── dataTransformer.js     	  # Chuyển đổi dữ liệu
+│   │   ├── analyzer.js            		# Phân tích dữ liệu
+│   │   └── sanitizer.js           		# Loại bỏ dữ liệu độc hại
+│   │
+│   ├── auth/                      		# Quản lý xác thực
+│   │   ├── tokenManager.js          	# Quản lý token JWT
+│   │   ├── apiKeys.js             		# Xác thực bằng API key
+│   │   └── userPermissions.js     	  # Phân quyền người dùng
+│   │
+│   ├── utils/                     		# Tiện ích chung
+│   │   ├── logger.js              		# Ghi nhật ký
+│   │   ├── config.js              		# Cấu hình dự án
+│   │   └── securityUtils.js       		# Tiện ích bảo mật (hash, mã hóa)
+│   │
+│   └── server.js                  		# Điểm khởi động chính của hệ thống
+│
+├── tests/                         		# Kiểm thử
+│   ├── unit/                      		# Kiểm thử đơn vị
+│   ├── integration/               		# Kiểm thử tích hợp
+│   ├── performance/               		# Kiểm thử hiệu năng
+│   └── security/                  		# Kiểm thử bảo mật
+│       ├── test_auth.js           		# Kiểm thử xác thực
+│       ├── test_encryption.js     		# Kiểm thử mã hóa
+│       └── test_sanitization.js   		# Kiểm thử loại bỏ dữ liệu độc hại
+│
+├── docker/                        		# Docker files
+│   ├── Dockerfile                 		# Định nghĩa container chính
+│   ├── docker-compose.yml           	# Cấu hình dịch vụ
+│   └── secrets/                   		# Lưu trữ bí mật (biến môi trường an toàn)
+│       ├── jwt_secret.key         		# Khóa bí mật JWT
+│       └── api_keys.env           		# API keys
+│
+├── logs/                          		# Lưu trữ nhật ký
+│   ├── crawler.log                		# Nhật ký thu thập dữ liệu
+│   ├── queue.log                  		# Nhật ký hàng đợi
+│   ├── storage.log                		# Nhật ký lưu trữ
+│   └── auth.log                   		# Nhật ký xác thực
+│
+├── scripts/                       		# Tập lệnh hỗ trợ
+│   ├── init.js                    		# Khởi tạo hệ thống (hàng đợi, lưu trữ)
+│   ├── cleanup.js                 		# Xóa dữ liệu tạm thời
+│   └── securityCheck.js           		# Kiểm tra bảo mật định kỳ
+│
+├── data/                          		# Dữ liệu tạm thời
+│   └── urls.json                  		# URL đã thu thập được (nếu cần)
+│
+├── .env                           		# Biến môi trường
+├── .gitignore                     		# Tệp/thư mục bỏ qua khi commit
+├── package.json                   		# Thông tin dự án và thư viện
+├── README.md                        	# Tài liệu giới thiệu dự án
+└── LICENSE                        		# Thông tin bản quyền
