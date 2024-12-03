@@ -1,0 +1,65 @@
+HỆ THỐNG VÀ MẠNG MÁY TÍNH
+()
+
+distributed-web-crawler/
+│
+├── src/                          # Mã nguồn chính của dự án
+│   ├── crawler/                  # Logic thu thập dữ liệu
+│   │   ├── fetcher.js            # Lấy nội dung HTML
+│   │   ├── parser.js             # Phân tích và trích xuất dữ liệu
+│   │   ├── scheduler.js          # Lập lịch URL ưu tiên
+│   │   ├── deduplicator.js       # Loại bỏ URL trùng lặp
+│   │   └── robotsParser.js       # Phân tích tệp robots.txt
+│   │
+│   ├── queue/                    # Quản lý hàng đợi URL
+│   │   ├── queueHandler.js       # Lớp trừu tượng quản lý hàng đợi
+│   │   ├── memcachedQueue.js     # Hàng đợi dựa trên Memcached (thay Redis)
+│   │   ├── rabbitmqQueue.js      # Hàng đợi dựa trên RabbitMQ
+│   │   └── fileQueue.js          # Hàng đợi dựa trên tệp
+│   │
+│   ├── storage/                  # Lưu trữ dữ liệu
+│   │   ├── storageHandler.js     # Lớp trừu tượng quản lý lưu trữ
+│   │   ├── fileStorage.js        # Lưu dữ liệu vào hệ thống tệp
+│   │   ├── meiliStorage.js       # Lưu dữ liệu vào Meilisearch (thay Elasticsearch)
+│   │   └── mongoStorage.js       # Lưu metadata vào MongoDB
+│   │
+│   ├── processing/               # Xử lý dữ liệu
+│   │   ├── dataCleaner.js        # Làm sạch dữ liệu thu thập được
+│   │   ├── dataTransformer.js    # Chuyển đổi dữ liệu sang định dạng cần thiết
+│   │   └── analyzer.js           # Phân tích dữ liệu (ví dụ: tần suất từ khóa)
+│   │
+│   ├── utils/                    # Tiện ích chung
+│   │   ├── logger.js             # Ghi nhật ký (Winston/Pino)
+│   │   ├── config.js             # Cấu hình dự án
+│   │   └── helpers.js            # Hàm tiện ích (mã hóa, xử lý URL)
+│   │
+│   └── server.js                 # Điểm khởi động chính của hệ thống
+│
+├── tests/                        # Kiểm thử
+│   ├── unit/                     # Kiểm thử đơn vị
+│   ├── integration/              # Kiểm thử tích hợp
+│   └── performance/              # Kiểm thử hiệu năng
+│
+├── docker/                       # Docker files
+│   ├── Dockerfile                # Định nghĩa container chính
+│   ├── docker-compose.yml        # Cấu hình dịch vụ
+│   └── memcached.conf            # Cấu hình Memcached (nếu cần tùy chỉnh)
+│
+├── logs/                         # Lưu trữ nhật ký
+│   ├── crawler.log               # Nhật ký thu thập dữ liệu
+│   ├── queue.log                 # Nhật ký hàng đợi
+│   └── storage.log               # Nhật ký lưu trữ
+│
+├── scripts/                      # Tập lệnh hỗ trợ
+│   ├── init.js                   # Khởi tạo hệ thống (hàng đợi, lưu trữ)
+│   ├── cleanup.js                # Xóa dữ liệu tạm thời hoặc lỗi
+│   └── monitor.js                # Giám sát trạng thái hệ thống
+│
+├── data/                         # Dữ liệu tạm thời
+│   └── urls.json                 # URL đã thu thập được (nếu cần)
+│
+├── .env                          # Biến môi trường
+├── .gitignore                    # Tệp/thư mục bỏ qua khi commit
+├── package.json                  # Thông tin dự án và thư viện
+├── README.md                     # Tài liệu giới thiệu dự án
+└── LICENSE                       # Thông tin bản quyền
