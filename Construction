@@ -1,5 +1,4 @@
 distributed-web-crawler/
-distributed-web-crawler/
 │
 ├── src/                           		# Mã nguồn chính của dự án
 │   ├── crawler/                   		# Logic thu thập dữ liệu
